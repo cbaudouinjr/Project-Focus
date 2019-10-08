@@ -26,9 +26,9 @@ def create_snapshot():
         user = submission_data['user']
         watson_payload = list(snapshot_data.values())
         watson_data = get_watson_prediction(watson_payload)
-        users.child(user).push(submission_data)  # push payload associated with a timestamp
+        users.child(user).push(request_json)  # push payload associated with a timestamp
 
-        return flask.jsonify(watson_data)
+        return Response(status=200)
     except KeyError as e:
         logging.error("Missing critical key")
         return Response("Missing critical key/value", status=400)
